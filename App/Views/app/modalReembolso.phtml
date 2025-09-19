@@ -1,0 +1,153 @@
+<!-- Modal -->
+<div class="modal fade" id="reembolsoModal" tabindex="-1" aria-labelledby="reembolsoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reembolsoModalLabel">Solicitar Reembolso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formReembolso" action="/reembolso" method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+
+                        <input type="hidden" name="Funcionario_Codigo" value="<?= $_SESSION['Funcionario_Codigo'] ?? '' ?>">
+
+                        <div class="col-md-4">
+                            <label for="Reembolso_Data" class="form-label fw-semibold">Data:</label>
+                            <input type="date" class="form-control" id="Reembolso_Data" name="Reembolso_Data" required>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="form-label fw-semibold">Precisou realizar uma viagem?</label></br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Reembolso_Viagem" id="Reembolso_Viagem_Sim" value="1" required>
+                                <label class="form-check-label" for="Reembolso_Viagem_Sim">Sim</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="Reembolso_Viagem" id="Reembolso_Viagem_Nao" value="0" required>
+                                <label class="form-check-label" for="Reembolso_Viagem_Nao">Não</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <label for="Reembolso_Tipo" class="form-label fw-semibold">Tipo de despesa:</label>
+                            <select name="Reembolso_Tipo" id="Reembolso_Tipo" class="form-select" required>
+                                <option value="" disabled selected>Selecione o tipo de despesa</option>
+                                <option value="Hospedagem">Hospedagem</option>
+                                <option value="Transporte">Transporte</option>
+                                <option value="Alimentação">Alimentação</option>
+                                <option value="Pedágio">Pedágio</option>
+                                <option value="Locação de veículo">Locação de veículo</option>
+                                <option value="Estacionamento">Estacionamento</option>
+                                <option value="Telefone">Telefone</option>
+                                <option value="Material de escritório">Material de escritório</option>
+                                <option value="Combustivel">Combustível</option>
+                                <option value="Outro">Outro (Especificar)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 mt-3">
+                            <label for="Reembolso_Motivo" class="form-label fw-semibold">Motivo:</label>
+                            <textarea class="form-control" id="Reembolso_Motivo" name="Reembolso_Motivo" rows="3" placeholder="Escreva o motivo do reembolso..." required></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Reembolso_Moeda" class="form-label fw-semibold">Moeda usada:</label>
+                            <select name="Reembolso_Moeda" id="Reembolso_Moeda" class="form-select" required>
+                                <option value="" disabled selected>Selecione a moeda</option>
+                                <option value="BRL">Real Brasileiro</option>
+                                <option value="USD">Dólar Americano</option>
+                                <option value="CLP">Peso Chileno</option>
+                                <option value="ARS">Peso Argentino</option>
+                                <option value="BOB">Boliviano</option>
+                                <option value="COP">Peso Colombiano</option>
+                                <option value="PEN">Sol do Peru</option>
+                                <option value="EUR">Euro</option>
+                                <option value="GBP">Libra Esterlina</option>
+                                <option value="NZD">Dólar Neozelandês</option>
+                                <option value="MXN">Peso Mexicano</option>
+                                <option value="CAD">Dólar Canadense</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Reembolso_Valor" class="form-label fw-semibold">Valor:</label>
+                            <input type="number" class="form-control" id="Reembolso_Valor" name="Reembolso_Valor" required>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <h5>Total em R$: <small id="totalConvertido">0,00</small></h5>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="Reembolso_Anexo" class="form-label fw-semibold">Anexo:</label>
+                        <input class="form-control" type="file" id="Reembolso_Anexo" name="Reembolso_Anexo" required>
+                    </div>
+
+                    <hr>
+
+                    <h3>Recebimento</h3>
+
+                    <div class="mb-3 mt-3">
+                        <label for="Reembolso_Banco" class="form-label fw-semibold">Método de recebimento:</label>
+                        <select class="form-control" id="Reembolso_Banco" name="Reembolso_Banco" required>
+                            <option value="">Selecione...</option>
+                            <option value="Pix">Pix</option>
+                            <option value="Transferencia">Transferência</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="Reembolso_Pix" class="form-label fw-semibold">Chave PIX:</label>
+                        <input type="text" class="form-control" id="Reembolso_Pix" name="Reembolso_Pix" placeholder="Digite sua chave PIX">
+                    </div>
+
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px; background-color: #4a90e2; border: none;">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const taxas = {
+        "BRL": 1,
+        "USD": 5.30,
+        "CLP": 0.0056,
+        "ARS": 0.0050,
+        "BOB": 0.73,
+        "COP": 0.0013,
+        "PEN": 1.40,
+        "EUR": 5.70,
+        "GBP": 6.60,
+        "NZD": 3.20,
+        "MXN": 0.30,
+        "CAD": 3.90
+    };
+
+    const inputValor = document.getElementById("Reembolso_Valor");
+    const selectMoeda = document.getElementById("Reembolso_Moeda");
+    const totalConvertido = document.getElementById("totalConvertido");
+
+    function atualizarTotal() {
+        const valor = parseFloat(inputValor.value) || 0;
+        const moeda = selectMoeda.value;
+
+        if (moeda && taxas[moeda]) {
+            const convertido = valor * taxas[moeda];
+            totalConvertido.textContent = convertido.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        } else {
+            totalConvertido.textContent = "0,00";
+        }
+    }
+
+    inputValor.addEventListener("input", atualizarTotal);
+    selectMoeda.addEventListener("change", atualizarTotal);
+</script>

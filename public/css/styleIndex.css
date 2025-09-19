@@ -1,0 +1,66 @@
+body {
+    background: #f5f5f5; /* fundo cinza claro */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000;
+}
+
+.description {
+    color: #000000;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.card-body {
+    padding: 2rem;
+}
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+.form-control {
+    border-radius: 50px;
+    padding-left: 3rem;
+}
+.input-group-text {
+    border-radius: 50px 0 0 50px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+}
+.btn-primary {
+    border-radius: 50px;
+    padding: 0.75rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin: 1rem;
+    }
+}

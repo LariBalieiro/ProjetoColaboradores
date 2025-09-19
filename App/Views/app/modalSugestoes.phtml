@@ -1,0 +1,27 @@
+<div class="modal fade" id="modalSugestoes" tabindex="-1" aria-labelledby="modalSugestoesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSugestoesLabel">Enviar Sugestão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+            <form id="formSugestao" method="post" action="/enviarSugestao">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="Sugestao_Texto" class="form-label">Digite sua sugestão:</label>
+                        <textarea class="form-control" id="Sugestao_Texto" name="Sugestao_Texto" rows="4" required></textarea>
+                    </div>
+                    <input type="hidden" name="Sugestao_Data" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

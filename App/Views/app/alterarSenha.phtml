@@ -1,0 +1,77 @@
+<?php include("_nav.phtml"); ?>
+
+<div class="container mt-5 pt-5">
+    <button onclick="history.back()" class="btn btn-primary mb-3">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </button>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg p-4 rounded-4 border-0" style="background-color: #f8f9fa;">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4 fw-bold">Alterar Senha</h3>
+
+                    <form id="formSenha" action="/alterarSenha" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="Funcionario_Codigo" value="<?= $_SESSION['Funcionario_Codigo'] ?? '' ?>">
+
+                        <div class="mb-3 position-relative">
+                            <label for="senhaAtual" class="form-label">Senha Atual</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" required>
+                                <span class="input-group-text">
+                                    <i class="bi bi-eye" id="toggleSenhaAtual" style="cursor: pointer;"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 position-relative">
+                            <label for="novaSenha" class="form-label">Nova Senha</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="novaSenha" name="novaSenha" required minlength="6">
+                                <span class="input-group-text">
+                                    <i class="bi bi-eye" id="toggleNovaSenha" style="cursor: pointer;"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 position-relative">
+                            <label for="confirmarSenha" class="form-label">Confirmar Nova Senha</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required minlength="6">
+                                <span class="input-group-text">
+                                    <i class="bi bi-eye" id="toggleConfirmarSenha" style="cursor: pointer;"></i>
+                                </span>
+                            </div>
+                            <div id="senhaFeedback" class="form-text text-danger mt-1 d-none">As senhas não coincidem!</div>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold">Atualizar Senha</button>
+                        </div>
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <small class="text-muted">A senha deve ter no mínimo 6 caracteres.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function togglePassword(inputId, toggleId) {
+        const input = document.getElementById(inputId);
+        const toggle = document.getElementById(toggleId);
+
+        toggle.addEventListener("click", function () {
+            const type = input.getAttribute("type") === "password" ? "text" : "password";
+            input.setAttribute("type", type);
+
+            this.classList.toggle("bi-eye");
+            this.classList.toggle("bi-eye-slash");
+        });
+    }
+
+    togglePassword("senhaAtual", "toggleSenhaAtual");
+    togglePassword("novaSenha", "toggleNovaSenha");
+    togglePassword("confirmarSenha", "toggleConfirmarSenha");
+</script>

@@ -1,0 +1,53 @@
+    <!-- aqui são coisas publicas -->
+    
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/styleIndex.css">
+    
+    <div class="card w-100" style="max-width: 500px;">
+        <div class="card-body text-center">
+            <a href="https://suaempresa.com.br">
+                <img src="img/Sua_Logo_Aqui.png" alt="Logo Sua Empresa" class="logo">
+            </a>
+            <p class="description">
+                É uma plataforma online centralizada do 
+                    <strong>
+                        Sua Empresa
+                    </strong> 
+                que serve como espaço para os funcionários 
+                acessarem informações e recursos relevantes 
+                para o seu trabalho.
+            </p>
+            <form method="post" action="/autenticar">
+                <div class="form-group">
+                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                    <input type="text" class="form-control" id="Funcionario_CPF" name="Funcionario_CPF" 
+                    placeholder="CPF" required>
+                </div>
+                <div class="form-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="Funcionario_Senha" name="Funcionario_Senha"
+                    placeholder="Senha" required>
+                    <span toggle="#Funcionario_Senha" class="fas fa-eye toggle-password"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+            <p class="mt-3">
+                <a href="#" class="text-white">Esqueceu sua senha?</a>
+            </p>
+        </div>
+    </div>
+    <?php if(isset($_GET['login']) && $_GET['login'] == 'erro'): ?>
+        <script>
+            $(document).ready(function() {
+                toastr.error('CPF ou senha inválidos!', 'Erro de autenticação');
+            });
+        </script>
+    <?php endif; ?>
+    <?php if(isset($_GET['logout']) && $_GET['logout'] == 'sucesso'): ?>
+        <script>
+            $(document).ready(function() {
+                toastr.success('Você saiu com sucesso!', 'Logout');
+            });
+        </script>
+    <?php endif; ?>
